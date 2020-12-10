@@ -63,15 +63,7 @@ const renderNewCard = (hand, card) => {
 const dealOneCard = (hand) => {
     card = deck.pop();
     hand.cards.push(card);
-    // renderNewCard(hand, card);
-};
-
-const initialDeal = () => {
-    shuffleCards();
-    dealOneCard(playerHand);
-    dealOneCard(dealerHand);
-    dealOneCard(playerHand);
-    dealOneCard(dealerHand);
+    renderHand(hand)
 };
 
 const clearImagesFromHandDiv = (hand) => {
@@ -88,21 +80,15 @@ const renderHand = (hand) => {
     }
 };
 
-let deck = [];
-fillNewDeck();
-let dealerHand = { owner: "dealer", cards: [] };
-let playerHand = { owner: "player", cards: [] };
-initialDeal();
-renderHand(dealerHand);
-renderHand(playerHand);
-
-console.log(deck);
-console.log(playerHand);
-console.log(dealerHand);
-
-// const createCombinations() {
-
-// }
+const initialDeal = () => {
+    shuffleCards();
+    dealOneCard(playerHand);
+    dealOneCard(dealerHand);
+    dealOneCard(playerHand);
+    dealOneCard(dealerHand);
+    renderHand(playerHand);
+    renderHand(dealerHand)
+};
 
 function createPointCombinationArrays(array) {
     var results = [[]];
@@ -121,7 +107,7 @@ function createPointCombinationArrays(array) {
 
 const sumArray = (arr) => {
     return arr.reduce(
-        (accumulator, currentValue) => accumulator + currentValue
+        ((accumulator, currentValue) => accumulator + currentValue), 0
     );
 };
 
@@ -130,15 +116,53 @@ const calculatePoints = (hand) => {
     for (const card of hand.cards) {
         valuesArr.push(card.value);
     }
-    // valueCombosArr = createCombinations(valuesArr)
     valueCombosArr = createPointCombinationArrays(valuesArr);
+    let sums = []
     for (const valueArr of valueCombosArr) {
-        let sum = sumArray(valueArr)
-        console.log(sum);
+        sums.push(sumArray(valueArr))
+    }
+    let minimumTotal = Math.min(...sums)
+    let totalsLessThan21 = sums.filter(num => num <= 21)
+    if (totalsLessThan21.length === 0) {
+        pointTotals[hand.owner] = [minimumTotal]
+    } else {
+        pointTotals[hand.owner] = totalsLessThan21
     }
 };
 
-calculatePoints(dealerHand);
-calculatePoints(playerHand);
+const calculateAndRenderPoints = (hand) => {
+    calculatePoints(hand)
+    renderPointsForHand(hand)
+}
 
-// console.log(sumArray([1, 2, 3]));
+const isHandBusted = (hand) => {
+    const isUnder21 = (pointTotal) => pointTotal < 22;
+    return !pointTotals[hand.owner].some(isUnder21);
+}
+
+let deck = [];
+fillNewDeck();
+let dealerHand = { owner: "dealer", cards: [] };
+let playerHand = { owner: "player", cards: [] };
+let pointTotals = { dealer: 0, player: 0}
+
+const renderPointsForHand = (hand) => {
+    let pointsSpan = document.getElementById(`${hand.owner}-points`)
+    pointsSpan.textContent = pointTotals[hand.owner].toString().replace(',', ', ')
+}
+
+window.addEventListener("click", (e) => {
+    if (e.target.id === "deal-button") {
+        initialDeal()
+        calculateAndRenderPoints(dealerHand);
+        calculateAndRenderPoints(playerHand);
+        // console.log(calculatePoints(playerHand))
+        console.log(isHandBusted(playerHand))
+    } else if (e.target.id === "hit-button") {
+        dealOneCard(playerHand)
+        calculateAndRenderPoints(playerHand);
+        console.log(isHandBusted(playerHand))
+    } else if (e.target.id === "stand-button") {
+        console.log("stand");
+    }
+})
