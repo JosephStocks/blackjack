@@ -4,34 +4,79 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Blackjack</title>
-  <link rel="stylesheet" href="extras/HereIsOneIPreparedEarlier.css">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <div class="message-box" id="messages"></div>
-  <div class="table">
-    <div class="player">
-      <label class="player-name">Dealer: 
+  <div id="table">
+    <div class="dealer">
+      <!-- <div id="dealer-hand" class="hand"> -->
+        <!-- <img src="images/jack_of_hearts.png" alt=""> -->
+      <!-- </div> -->
+      <label class="player-name dealer-position">Dealer: 
         <span id="dealer-points" class="points"></span>
       </label>
-      <div id="dealer-hand" class="hand">
-        <!-- Dealer Hand -->
-
+      <div class="cards">
+        <div class="cardWrapper">
+          <!-- <div class="card">card 1 blah blah blah</div> -->
+          <img class="card" src="images/jack_of_hearts.png" alt="">
+        </div>
+        <div class="cardWrapper">
+          <!-- <div class="card">card 2 blah blah blah</div> -->
+          <img class="card" src="images/jack_of_hearts.png" alt="">
+        </div>
+        <div class="cardWrapper">
+          <!-- <div class="card">card 3 blah blah blah</div> -->
+          <img class="card" src="images/jack_of_hearts.png" alt="">
+        </div>
+        <div class="cardWrapper">
+          <!-- <div class="card">card 4 blah blah blah</div> -->
+          <img class="card" src="images/jack_of_hearts.png" alt="">
+        </div>
+        <div class="cardWrapper">
+          <!-- <div class="card">card 5 blah blah blah</div> -->
+          <img class="card" src="images/jack_of_hearts.png" alt="">
+        </div>
       </div>
     </div>
     <div class="player">
-      <label class="player-name">Player: 
-        <span id="player-points" class="points"></span>
+      <!-- <div id="player-hand" class="hand">
+        <img src="images/jack_of_hearts.png" alt="">
+      </div> -->
+      <label class="player-name player-position">Player: 
+        <span id="dealer-points" class="points"></span>
       </label>
-      <div id="player-hand" class="hand">
-        <!-- Player Hand -->
+      <div class="cards">
+        <div class="cardWrapper">
+          <!-- <div class="card">card 1 blah blah blah</div> -->
+          <img class="card" src="images/jack_of_hearts.png" alt="">
+        </div>
+        <div class="cardWrapper">
+          <!-- <div class="card">card 2 blah blah blah</div> -->
+          <img class="card" src="images/jack_of_hearts.png" alt="">
+        </div>
+        <div class="cardWrapper">
+          <!-- <div class="card">card 3 blah blah blah</div> -->
+          <img class="card" src="images/jack_of_hearts.png" alt="">
+        </div>
+        <div class="cardWrapper">
+          <!-- <div class="card">card 4 blah blah blah</div> -->
+          <img class="card" src="images/jack_of_hearts.png" alt="">
+        </div>
+        <div class="cardWrapper">
+          <!-- <div class="card">card 5 blah blah blah</div> -->
+          <img class="card" src="images/jack_of_hearts.png" alt="">
+        </div>
+      </div>
+      
+      <div class="buttons">
+        <a href="">
+          <div></div>
+        </a>
       </div>
     </div>
-    <div class="buttons">
-      <button id="deal-button" type="button">Deal</button>
-      <button id="hit-button" type="button">Hit</button>
-      <button id="stand-button" type="button">Stand</button>
-    </div>
+    <!-- <button></button> -->
+    
   </div>
-  <script src="scripts/main.js"></script>
+  <!-- <script src="scripts/main.js"></script> -->
 </body>
 </html>
