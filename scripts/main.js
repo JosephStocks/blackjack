@@ -244,12 +244,10 @@ const dealForDealer = () => {
     let stillDealing = true;
     while (stillDealing) {
         if (pointTotals["dealer"] <= 16) {
-            // sleep(1500)
             dealOneCard(dealerHand);
             calculateAndRenderPoints(dealerHand);
             isHandBusted(dealerHand);
         } else if (pointTotals["dealer"] === 17 && isOneCardAnAce(dealerHand)) {
-            // sleep(1500)
             dealOneCard(dealerHand);
             calculateAndRenderPoints(dealerHand);
             isHandBusted(dealerHand);

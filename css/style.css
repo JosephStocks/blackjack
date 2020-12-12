@@ -1,26 +1,3 @@
-/* img[alt="table-background"] {
-    width: 100%;
-    max-width: 100vw;
-    min-width: 600px;
-    overflow: hidden;
-    max-height: 100vh;
-    margin: 0 auto;
-    width: auto;
-    height: auto;
-} */
-/* 
-body {
-    background-color: black;
-}
-
-.table {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100vh;
-    height: 100vh;
-} */
-
 html, body {
     margin: 0;
     height: 100%;
@@ -31,14 +8,18 @@ body {
     box-sizing: border-box;
     background-color: black;
     z-index: -100;
+    height: 100vh;
+    width: 100vh;
 }
   
 body * {
     box-sizing: inherit;
+
 }
 
 #table {
-    height: 98vh;
+    height: 90%;
+    width: 90%;
     background: center / cover no-repeat url("../images/blackjack_table_ZoomedCrop1.png");
     z-index: 100;
     max-width: 1000px;
@@ -51,7 +32,6 @@ body * {
 
 .dealer {
     height: 50%;
-    /* border: red solid 10px; */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -59,24 +39,15 @@ body * {
 
 .player {
     height: 50%;
-    /* border: red solid 10px; */
     display: flex;
     justify-content: center;
     align-items: center;
 
 }
 
-/* #player-hand {
-    display: flex;
-    width: 300px;
-} */
-
 .cards {
     display: flex;
     align-content: center;
-    /* max-width: 100px; */
-    /* width: 90px; */
-    /* width: calc(90px + 2 * 23.9px); */
     width: 90px;
 }
 
@@ -122,13 +93,6 @@ overflow: hidden;
     position: absolute;
     bottom: 17rem;
 }
-
-/* .buttons {
-    display:  block;
-    color: white;
-    position: absolute;
-    bottom: 5%;
-} */
 
 a.button1 {
     display: inline-block;
@@ -205,26 +169,6 @@ a.button1:not(.disabled):hover{
 .smaller-font {
     font-size: 22px;
 }
-/* a.button2 {
-    display: inline-block;
-    padding: 0.35em 1.2em;
-    border: 0.1em solid #FFFFFF;
-    margin: 0 0.3em 0.3em 0;
-    border-radius: 0.12em;
-    box-sizing: border-box;
-    text-decoration: none;
-    font-family: 'Roboto', sans-serif;
-    font-weight: 300;
-    color: #FFFFFF;
-    text-align: center;
-    transition: all 0.2s;
-    cursor: pointer;
-}
-
-a.button2:not(.disabled):hover{
-    color: #000000;
-    background-color: #FFFFFF;
-} */
 
 .green {
     background-color: green !important;
