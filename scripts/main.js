@@ -57,30 +57,30 @@ const renderNewCard = (hand, card) => {
     let img = document.createElement("img");
     img.src = card.imageFilePath;
     img.className = "card";
-    let div = document.createElement("div");
-    div.className = "cardWrapper";
-    div.appendChild(img);
+    let cardWrapper = document.createElement("div");
+    cardWrapper.className = "card-wrapper";
+    cardWrapper.appendChild(img);
     let handDiv = document.querySelector(`#${hand.owner}-hand`);
-    handDiv.appendChild(div);
+    handDiv.appendChild(cardWrapper);
 
-    let numCardsToCardsClassWidth = [
-        66.12,
-        90.0,
-        113.89,
-        137.77,
-        161.66,
-        185.54,
-        209.43,
-        233.31,
-        257.2,
-        281.08,
-        304.97,
-        328.85,
-    ];
-    let cardsDiv = document.querySelector(`#${hand.owner}-hand.cards`);
-    cardsDiv.style.width =
-        numCardsToCardsClassWidth[cardsDiv.childElementCount - 1].toString() +
-        "px";
+    // let numCardsToCardsClassWidth = [
+    //     66.12,
+    //     90.0,
+    //     113.89,
+    //     137.77,
+    //     161.66,
+    //     185.54,
+    //     209.43,
+    //     233.31,
+    //     257.2,
+    //     281.08,
+    //     304.97,
+    //     328.85,
+    // ];
+    // let cardsDiv = document.querySelector(`#${hand.owner}-hand.cards`);
+    // cardsDiv.style.width =
+    //     numCardsToCardsClassWidth[cardsDiv.childElementCount - 1].toString() +
+    //     "px";
 };
 
 const dealOneCard = (hand) => {
@@ -111,7 +111,7 @@ const initialDeal = () => {
     renderHand(playerHand);
     renderHand(dealerHand);
     let dealButton = document.querySelector("#deal-button");
-    dealButton.classList.toggle("disabled");
+    dealButton.classList.remove("disabled");
 };
 
 function createPointCombinationArrays(array) {
@@ -217,10 +217,9 @@ const resetEverything = () => {
     document.querySelector("#winner-message").classList.add("invisible");
     document.querySelector("#lost-message").classList.add("invisible");
     document.querySelector("#background-opacity").classList.add("invisible");
-    let buttons = document.querySelectorAll(".game");
-    for (const button of buttons) {
-        button.classList.remove("disabled");
-    }
+    document.querySelector("#deal-button").classList.remove("disabled");
+    document.querySelector("#hit-button").classList.add("disabled");
+    document.querySelector("#stand-button").classList.add("disabled");
 };
 
 function sleep(milliseconds) {
@@ -289,6 +288,9 @@ window.addEventListener("click", (e) => {
         calculateAndRenderPoints(dealerHand);
         calculateAndRenderPoints(playerHand);
         isHandBusted(playerHand);
+        document.querySelector("#hit-button").classList.remove("disabled");
+        document.querySelector("#stand-button").classList.remove("disabled");
+        document.querySelector("#deal-button").classList.add("disabled");
     } else if (e.target.id === "hit-button") {
         dealOneCard(playerHand);
         renderHand(playerHand);

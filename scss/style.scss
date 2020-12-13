@@ -1,0 +1,188 @@
+$button-color: white;
+$info-popup-width: 400px;
+$green: #005712;
+
+html {
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+h1, h2, h3, h4, h5, h6, p, ol, ul {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  background-color: black;
+}
+
+body, html {
+  margin: 0;
+  height: 100%;
+  padding: 0;
+}
+
+#table {
+  background: center / cover no-repeat url("../images/blackjack_table_ZoomedCrop1.png");
+  height: 98%;
+}
+
+.dealer, .player {
+  height: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.invisible {
+  display: none !important;
+}
+
+label {
+  width: 600px;
+  font-size: 28px;
+  color: white;
+  font-weight: 400;
+}
+
+.dealer-position {
+  position: absolute;
+  top: 20%;
+}
+
+.player-position {
+  position: absolute;
+  top: 10%;
+}
+
+
+
+.cards {
+  position: absolute;
+  bottom: 28%;
+  height: 140px;
+  margin-top: 45px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 9%;
+}
+
+// img {
+//   height: 200px;
+//   position: relative;
+//   transition: transform .35s;
+//   &:not(:first-child) {
+//     margin-left: -100px;
+//   }
+//   &:hover {
+//     transform: translatey(-30%);
+//   }
+// }
+
+img {
+  height: 200px;
+  transition: transform .35s;
+}
+
+.card-wrapper {
+  position: relative;
+
+  &:not(:first-child) {
+    margin-left: -100px;
+  }
+  &:hover img {
+    transform: translatey(-30%);
+  }
+}
+
+.buttons {
+  position: absolute;
+  bottom: 7%;
+}
+
+.main-button {
+  display: inline-block;
+  border: $button-color 2px solid;
+  padding: 10px;
+  width: 100px;
+  text-align: center;
+  color: $button-color;
+  border-radius: 5px;
+  font-size: 22px;
+  line-height: 1;
+  transition: all 0.2s;
+
+  &:not(:last-child) {
+    margin-right: 30px;
+  }
+
+  &:hover {
+    color: $green;
+    background-color: white;
+    font-weight: bold;
+    cursor: pointer;
+  }
+}
+
+
+.info {
+  position: absolute;
+  bottom: calc(55% - 100px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  color: white;
+  background-color: red;
+  width: $info-popup-width;
+  height: 200px;
+  font-size: 40px;
+  border-radius: 10px;
+  z-index: 20;
+  padding: 25px;
+  margin: 0 auto;
+  left: calc(50% - #{$info-popup-width} / 2);
+  &.green {
+    background-color: $green;
+  }
+  &.gray {
+    background-color: gray;
+  }
+}
+
+#background-opacity {
+  position: fixed;
+  top: 0;
+  left: 0;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 100vw;
+  height: 100vh;
+  z-index: 10;
+}
+
+.smaller-font {
+  font-size: 24px;
+  &:hover {
+    color: red;
+  }
+}
+
+.disabled {
+  background-color: gray;
+  cursor: default !important;
+  border: none !important;
+  opacity: 50%;
+  pointer-events: none;
+}
+
+.not-visible {
+  visibility: hidden;
+}

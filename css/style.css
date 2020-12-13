@@ -1,178 +1,202 @@
-html, body {
-    margin: 0;
-    height: 100%;
+html {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  font-size: 16px;
+}
+
+*, *:before, *:after {
+  -webkit-box-sizing: inherit;
+          box-sizing: inherit;
+}
+
+h1, h2, h3, h4, h5, h6, p, ol, ul {
+  margin: 0;
+  padding: 0;
 }
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    box-sizing: border-box;
-    background-color: black;
-    z-index: -100;
-    height: 100vh;
-    width: 100vh;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  background-color: black;
 }
-  
-body * {
-    box-sizing: inherit;
 
+body, html {
+  margin: 0;
+  height: 100%;
+  padding: 0;
 }
 
 #table {
-    height: 90%;
-    width: 90%;
-    background: center / cover no-repeat url("../images/blackjack_table_ZoomedCrop1.png");
-    z-index: 100;
-    max-width: 1000px;
-    margin: 0 auto;
+  background: center/cover no-repeat url("../images/blackjack_table_ZoomedCrop1.png");
+  height: 98%;
 }
 
-.hand {
-    height: 120px;
-}
-
-.dealer {
-    height: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.player {
-    height: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-}
-
-.cards {
-    display: flex;
-    align-content: center;
-    width: 90px;
-}
-
-.cards:hover {
-    width: calc(90px + 3 * 23.9px);
-}
-  
-.cardWrapper {
-overflow: hidden;
-}
-
-
-.cardWrapper:last-child {
-    overflow: visible;
-}
-
-
-.cardWrapper:hover {
-    position: relative;
-    bottom: 5px;
-    overflow: visible;
-    z-index: 500;
-} 
-  
-.card {
-    height: 6em;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-.player-name {
-    color: white;
-    width: 400px;
-}
-
-.dealer-position {
-    position: absolute;
-    top: 3rem;
-}
-.player-position {
-    position: absolute;
-    bottom: 17rem;
-}
-
-a.button1 {
-    display: inline-block;
-    padding: 0.35em 1.2em;
-    border: 0.1em solid #FFFFFF;
-    margin: 0 0.3em 0.3em 0;
-    border-radius: 0.12em;
-    box-sizing: border-box;
-    text-decoration: none;
-    font-family: 'Roboto', sans-serif;
-    font-weight: 300;
-    color: #FFFFFF;
-    text-align: center;
-    transition: all 0.2s;
-    cursor: pointer;
-}
-
-a.button1:not(.disabled):hover{
-    color: #000000;
-    background-color: #FFFFFF;
-}
-@media all and (max-width:30em){
-    a.button1{
-        display:block;
-        margin:0.4em auto;
-    }
-}
-
-.buttons {
-    position: absolute;
-    bottom: 10%;
-}
-
-.disabled {
-    background-color: gray;
-    cursor: default !important;
-    border: none !important;
-    opacity: 50%;
-    pointer-events: none;
+.dealer, .player {
+  height: 50%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  position: relative;
 }
 
 .invisible {
-    display: none !important;
+  display: none !important;
+}
+
+label {
+  width: 600px;
+  font-size: 28px;
+  color: white;
+  font-weight: 400;
+}
+
+.dealer-position {
+  position: absolute;
+  top: 20%;
+}
+
+.player-position {
+  position: absolute;
+  top: 10%;
+}
+
+.cards {
+  position: absolute;
+  bottom: 28%;
+  height: 140px;
+  margin-top: 45px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-left: 9%;
+}
+
+img {
+  height: 200px;
+  -webkit-transition: -webkit-transform .35s;
+  transition: -webkit-transform .35s;
+  transition: transform .35s;
+  transition: transform .35s, -webkit-transform .35s;
+}
+
+.card-wrapper {
+  position: relative;
+}
+
+.card-wrapper:not(:first-child) {
+  margin-left: -100px;
+}
+
+.card-wrapper:hover img {
+  -webkit-transform: translatey(-30%);
+          transform: translatey(-30%);
+}
+
+.buttons {
+  position: absolute;
+  bottom: 7%;
+}
+
+.main-button {
+  display: inline-block;
+  border: white 2px solid;
+  padding: 10px;
+  width: 100px;
+  text-align: center;
+  color: white;
+  border-radius: 5px;
+  font-size: 22px;
+  line-height: 1;
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
+}
+
+.main-button:not(:last-child) {
+  margin-right: 30px;
+}
+
+.main-button:hover {
+  color: #005712;
+  background-color: white;
+  font-weight: bold;
+  cursor: pointer;
 }
 
 .info {
-    position: absolute;
-    bottom: calc(55% - 100px);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-    color: white;
-    background-color: red;
-    width: 400px;
-    height: 200px;
-    font-size: 40px;
-    border-radius: 10px;
-    z-index: 20;
-    padding: 25px;
+  position: absolute;
+  bottom: calc(55% - 100px);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  color: white;
+  background-color: red;
+  width: 400px;
+  height: 200px;
+  font-size: 40px;
+  border-radius: 10px;
+  z-index: 20;
+  padding: 25px;
+  margin: 0 auto;
+  left: calc(50% - 400px / 2);
+}
+
+.info.green {
+  background-color: #005712;
+}
+
+.info.gray {
+  background-color: gray;
 }
 
 #background-opacity {
-    position: fixed;
-    top: 0;
-    left: 0;
-    color: white;
-    background-color: rgba(0, 0, 0, 0.5);
-    width: 100vw;
-    height: 100vh;
-    z-index: 10;
+  position: fixed;
+  top: 0;
+  left: 0;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 100vw;
+  height: 100vh;
+  z-index: 10;
 }
 
 .smaller-font {
-    font-size: 22px;
+  font-size: 24px;
 }
 
-.green {
-    background-color: green !important;
+.smaller-font:hover {
+  color: red;
 }
-.gray {
-    background-color: rgb(75, 75, 75) !important;
+
+.disabled {
+  background-color: gray;
+  cursor: default !important;
+  border: none !important;
+  opacity: 50%;
+  pointer-events: none;
 }
+
+.not-visible {
+  visibility: hidden;
+}
+/*# sourceMappingURL=style.css.map */

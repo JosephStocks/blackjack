@@ -1,62 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Blackjack</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
   <div id="table">
     <div class="dealer">
-      <label class="player-name dealer-position">Dealer: 
+      <label class="dealer-position">Dealer:
         <span id="dealer-points" class="points"></span>
       </label>
       <div id="dealer-hand" class="cards">
-        <!-- <div class="cardWrapper">
+        <!-- <div class="card-wrapper">
           <img class="card" src="images/jack_of_hearts.png" alt="">
         </div>
-        <div class="cardWrapper">
+        <div class="card-wrapper">
           <img class="card" src="images/jack_of_hearts.png" alt="">
         </div> -->
       </div>
     </div>
     <div class="player">
-      <label class="player-name player-position">Player: 
+      <label class="player-position">Player:
         <span id="player-points" class="points"></span>
       </label>
       <div id="player-hand" class="cards">
-        <!-- <div class="cardWrapper">
+        <!-- <div class="card-wrapper">
+          <img class="card" src="images/jack_of_hearts.png" alt="">
+        </div>-->
+        <div class="card-wrapper">
           <img class="card" src="images/jack_of_hearts.png" alt="">
         </div>
-        <div class="cardWrapper">
+        <div class="card-wrapper">
           <img class="card" src="images/jack_of_hearts.png" alt="">
-        </div> -->
+        </div>
+        <div class="card-wrapper not-visible">
+          <img class="card" src="images/jack_of_hearts.png" alt="">
+        </div>
+        <div class="card-wrapper not-visible">
+          <img class="card" src="images/jack_of_hearts.png" alt="">
+        </div>
+        <div class="card-wrapper not-visible">
+          <img class="card" src="images/jack_of_hearts.png" alt="">
+        </div>
+        <div class="card-wrapper not-visible">
+          <img class="card" src="images/jack_of_hearts.png" alt="">
+        </div>
+        <div class="card-wrapper not-visible">
+          <img class="card" src="images/jack_of_hearts.png" alt="">
+        </div>
+        <div class="card-wrapper not-visible">
+          <img class="card" src="images/jack_of_hearts.png" alt="">
+        </div>
       </div>
       <div class="buttons">
-        <a id="deal-button" class="button1 game" type="button">Deal</a>
-        <a id="hit-button" class="button1 game" type="button">Hit</a>
-        <a id="stand-button" class="button1 game" type="button">Stand</a>
+        <a id="deal-button" class="main-button game" type="button">Deal</a>
+        <a id="hit-button" class="main-button game disabled" type="button">Hit</a>
+        <a id="stand-button" class="main-button game disabled" type="button">Stand</a>
       </div>
-      <div id="busted-message" class="info invisible">
-        <div class="">You Busted!</div>
-        <a id="reset-button" class="button1 smaller-font" type="button">Reset</a>
-      </div>
-      <div id="winner-message" class="info invisible green">
-        <div class="">You Won!</div>
-        <a id="reset-button" class="button1 smaller-font" type="button">Reset</a>
-      </div>
-      <div id="draw-message" class="info invisible gray">
-        <div class="">It's a Draw.</div>
-        <a id="reset-button" class="button1 smaller-font" type="button">Reset</a>
-      </div>
-      <div id="lost-message" class="info invisible">
-        <div class="">Dealer Wins!</div>
-        <a id="reset-button" class="button1 smaller-font" type="button">Reset</a>
-      </div>
-      <div id="background-opacity" class="invisible"></div>
+
     </div>
+    <div id="busted-message" class="info invisible">
+      <div class="">You Busted!</div>
+      <a id="reset-button" class="main-button smaller-font" type="button">Reset</a>
+    </div>
+    <div id="winner-message" class="info invisible green">
+      <div class="">You Won!</div>
+      <a id="reset-button" class="main-button smaller-font" type="button">Reset</a>
+    </div>
+    <div id="draw-message" class="info invisible gray">
+      <div class="">It's a Draw.</div>
+      <a id="reset-button" class="main-button smaller-font" type="button">Reset</a>
+    </div>
+    <div id="lost-message" class="info invisible">
+      <div class="">Dealer Wins!</div>
+      <a id="reset-button" class="main-button smaller-font" type="button">Reset</a>
+    </div>
+    <div id="background-opacity" class="invisible"></div>
   </div>
   <script src="scripts/main.js"></script>
 </body>
+
 </html>
