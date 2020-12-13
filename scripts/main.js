@@ -1,11 +1,3 @@
-// window.addEventListener("click", (e) => {
-//     if (e.target.id === "deal-button") {
-//         let img = document.createElement('img')
-//         img.src = "images/10_of_spades.png"
-//         let dealer_hand = document.querySelector('#dealer-hand')
-//         dealer_hand.appendChild(img)
-//     }
-// })
 const rankToName = (rank) => {
     let rankToName = { 1: "ace", 11: "jack", 12: "queen", 13: "king" };
     let cardName;
@@ -53,6 +45,18 @@ const shuffleCards = () => {
     }
 };
 
+const addInvisibleCard = (hand) => {
+    let img = document.createElement("img");
+    img.src = "images/jack_of_hearts.png";
+    img.className = "card";
+    let cardWrapper = document.createElement("div");
+    cardWrapper.className = "card-wrapper not-visible";
+    cardWrapper.appendChild(img);
+    let handDiv = document.querySelector(`#${hand.owner}-hand`);
+    handDiv.appendChild(cardWrapper);
+    console.log("Adding invisible card");
+};
+
 const renderNewCard = (hand, card) => {
     let img = document.createElement("img");
     img.src = card.imageFilePath;
@@ -60,27 +64,19 @@ const renderNewCard = (hand, card) => {
     let cardWrapper = document.createElement("div");
     cardWrapper.className = "card-wrapper";
     cardWrapper.appendChild(img);
-    let handDiv = document.querySelector(`#${hand.owner}-hand`);
-    handDiv.appendChild(cardWrapper);
-
-    // let numCardsToCardsClassWidth = [
-    //     66.12,
-    //     90.0,
-    //     113.89,
-    //     137.77,
-    //     161.66,
-    //     185.54,
-    //     209.43,
-    //     233.31,
-    //     257.2,
-    //     281.08,
-    //     304.97,
-    //     328.85,
-    // ];
-    // let cardsDiv = document.querySelector(`#${hand.owner}-hand.cards`);
-    // cardsDiv.style.width =
-    //     numCardsToCardsClassWidth[cardsDiv.childElementCount - 1].toString() +
-    //     "px";
+    console.log(`#${hand.owner}-hand > .card-wrapper.not-visible`);
+    let invisibleCardDiv = document.querySelector(
+        `#${hand.owner}-hand > .card-wrapper.not-visible`
+    );
+    console.log(!!invisibleCardDiv);
+    if (!!invisibleCardDiv) {
+        console.log("It's triggering!");
+        invisibleCardDiv.parentNode.replaceChild(cardWrapper, invisibleCardDiv);
+    } else {
+        console.log("oh no!");
+        let handDiv = document.querySelector(`#${hand.owner}-hand`);
+        handDiv.appendChild(cardWrapper);
+    }
 };
 
 const dealOneCard = (hand) => {
@@ -88,15 +84,23 @@ const dealOneCard = (hand) => {
     hand.cards.push(card);
 };
 
-const clearImagesFromHandDiv = (hand) => {
+const clearAllImageDivsFromHandDiv = (hand) => {
     const handDiv = document.getElementById(`${hand.owner}-hand`);
     while (handDiv.firstChild) {
         handDiv.firstChild.remove();
     }
 };
 
+const clearOnlyVisibleImagesFromHandDiv = (hand) => {
+    document
+        .querySelectorAll(
+            `#${hand.owner}-hand > .card-wrapper:not(.not-visible)`
+        )
+        .forEach((e) => e.parentNode.removeChild(e));
+};
+
 const renderHand = (hand) => {
-    clearImagesFromHandDiv(hand);
+    clearOnlyVisibleImagesFromHandDiv(hand);
     for (const card of hand.cards) {
         renderNewCard(hand, card);
     }
@@ -203,8 +207,8 @@ const renderPointsForHand = (hand) => {
 };
 
 const resetEverything = () => {
-    clearImagesFromHandDiv(dealerHand);
-    clearImagesFromHandDiv(playerHand);
+    clearAllImageDivsFromHandDiv(dealerHand);
+    clearAllImageDivsFromHandDiv(playerHand);
     deck = [];
     fillNewDeck();
     dealerHand = { owner: "dealer", cards: [] };
@@ -220,6 +224,16 @@ const resetEverything = () => {
     document.querySelector("#deal-button").classList.remove("disabled");
     document.querySelector("#hit-button").classList.add("disabled");
     document.querySelector("#stand-button").classList.add("disabled");
+    addInvisibleCard(dealerHand);
+    addInvisibleCard(dealerHand);
+    addInvisibleCard(dealerHand);
+    addInvisibleCard(dealerHand);
+    addInvisibleCard(dealerHand);
+    addInvisibleCard(playerHand);
+    addInvisibleCard(playerHand);
+    addInvisibleCard(playerHand);
+    addInvisibleCard(playerHand);
+    addInvisibleCard(playerHand);
 };
 
 function sleep(milliseconds) {
@@ -245,10 +259,12 @@ const dealForDealer = () => {
         if (pointTotals["dealer"] <= 16) {
             dealOneCard(dealerHand);
             calculateAndRenderPoints(dealerHand);
+            renderHand(dealerHand)
             isHandBusted(dealerHand);
         } else if (pointTotals["dealer"] === 17 && isOneCardAnAce(dealerHand)) {
             dealOneCard(dealerHand);
             calculateAndRenderPoints(dealerHand);
+            renderHand(dealerHand)
             isHandBusted(dealerHand);
         } else {
             stillDealing = false;
@@ -281,9 +297,10 @@ const dealForDealer = () => {
         }
     }
 };
-
+resetEverything();
 window.addEventListener("click", (e) => {
     if (e.target.id === "deal-button") {
+        resetEverything();
         initialDeal();
         calculateAndRenderPoints(dealerHand);
         calculateAndRenderPoints(playerHand);
@@ -291,6 +308,8 @@ window.addEventListener("click", (e) => {
         document.querySelector("#hit-button").classList.remove("disabled");
         document.querySelector("#stand-button").classList.remove("disabled");
         document.querySelector("#deal-button").classList.add("disabled");
+        console.log(pointTotals['dealer']);
+        console.log(pointTotals['player']);
     } else if (e.target.id === "hit-button") {
         dealOneCard(playerHand);
         renderHand(playerHand);

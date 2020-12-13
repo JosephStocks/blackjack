@@ -69,9 +69,10 @@ label {
   height: 140px;
   margin-top: 45px;
   display: flex;
-  justify-content: center;
+  justify-content: left;
   align-items: center;
-  margin-left: 9%;
+  margin-left: 200px;
+  width: 500px;
 }
 
 // img {
@@ -149,12 +150,17 @@ img {
   padding: 25px;
   margin: 0 auto;
   left: calc(50% - #{$info-popup-width} / 2);
+  box-shadow: 0 0 100px 50px black;
+  border: black solid 2px;
   &.green {
     background-color: $green;
+    border: white solid 2px;
+    box-shadow: 0 0 250px 100px white;
   }
   &.gray {
     background-color: gray;
   }
+
 }
 
 #background-opacity {
@@ -170,9 +176,19 @@ img {
 
 .smaller-font {
   font-size: 24px;
-  &:hover {
-    color: red;
-  }
+  // &:hover {
+  //   color: red;
+  // }
+}
+
+#busted-message > .main-button:hover, #lost-message > .main-button:hover {
+  color: red;
+}
+#winner-message > .main-button:hover {
+  color: $green;
+}
+#draw-message > .main-button:hover {
+  color: gray;
 }
 
 .disabled {
