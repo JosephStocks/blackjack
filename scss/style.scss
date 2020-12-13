@@ -71,21 +71,10 @@ label {
   display: flex;
   justify-content: left;
   align-items: center;
-  margin-left: 200px;
-  width: 500px;
+  margin-left: -100px;
+  width: 100px;
 }
 
-// img {
-//   height: 200px;
-//   position: relative;
-//   transition: transform .35s;
-//   &:not(:first-child) {
-//     margin-left: -100px;
-//   }
-//   &:hover {
-//     transform: translatey(-30%);
-//   }
-// }
 
 img {
   height: 200px;
@@ -176,9 +165,6 @@ img {
 
 .smaller-font {
   font-size: 24px;
-  // &:hover {
-  //   color: red;
-  // }
 }
 
 #busted-message > .main-button:hover, #lost-message > .main-button:hover {

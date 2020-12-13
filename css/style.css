@@ -80,8 +80,8 @@ label {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  margin-left: 200px;
-  width: 500px;
+  margin-left: -100px;
+  width: 100px;
 }
 
 img {
