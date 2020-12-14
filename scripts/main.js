@@ -95,6 +95,25 @@ const renderHand = (hand) => {
     }
 };
 
+const renderHiddenCard = (hand) => {
+    let img = document.createElement("img");
+    img.src = "images/back_of_card1_bicycle.png";
+    img.className = "card";
+    let cardWrapper = document.createElement("div");
+    cardWrapper.className = "card-wrapper";
+    cardWrapper.appendChild(img);
+    let handDiv = document.querySelector(`#${hand.owner}-hand`);
+    handDiv.appendChild(cardWrapper);
+};
+
+const renderHandWHiddenCard = (hand) => {
+    clearAllImageDivsFromHandDiv(hand);
+    renderHiddenCard(hand);
+    for (const card of hand.cards.slice(1)) {
+        renderNewCard(hand, card);
+    }
+};
+
 const initialDeal = () => {
     shuffleCards();
     dealOneCard(playerHand);
@@ -102,7 +121,7 @@ const initialDeal = () => {
     dealOneCard(playerHand);
     dealOneCard(dealerHand);
     renderHand(playerHand);
-    renderHand(dealerHand);
+    renderHandWHiddenCard(dealerHand);
     let dealButton = document.querySelector("#deal-button");
     dealButton.classList.remove("disabled");
 };
@@ -153,34 +172,6 @@ const calculateAndRenderPoints = (hand) => {
     renderPointsForHand(hand);
 };
 
-// const isHandBusted = (hand) => {
-//     const isUnder21 = (pointTotal) => pointTotal < 22;
-//     if (!pointTotals[hand.owner].some(isUnder21)) {
-//         if (hand.owner == "player") {
-//             document
-//                 .querySelector("#busted-message")
-//                 .classList.remove("invisible");
-//             document
-//                 .querySelector("#background-opacity")
-//                 .classList.remove("invisible");
-//             let buttons = document.querySelectorAll(".game");
-//             for (const button of buttons) {
-//                 button.classList.add("disabled");
-//             }
-//         } else {
-//             document
-//                 .querySelector("#winner-message")
-//                 .classList.remove("invisible");
-//             document
-//                 .querySelector("#background-opacity")
-//                 .classList.remove("invisible");
-//             let buttons = document.querySelectorAll(".game");
-//             for (const button of buttons) {
-//                 button.classList.add("disabled");
-//             }
-//         }
-//     }
-// };
 const setHandBustStatus = (hand) => {
     const isUnder21 = (pointTotal) => pointTotal < 22;
     if (!pointTotals[hand.owner].some(isUnder21)) {
@@ -199,6 +190,20 @@ const renderPointsForHand = (hand) => {
     pointsSpan.textContent = pointTotals[hand.owner]
         .toString()
         .replace(",", ", ");
+};
+
+const calculateAndRenderPossiblePointRange = (hand) => {
+    let pointsSpan = document.getElementById(`${hand.owner}-points`);
+    shownCardPoints = hand.cards[1].value;
+    if (shownCardPoints.length === 1) {
+        pointsSpan.textContent = `Range of Possible Points: ${
+            shownCardPoints[0] + 1
+        } to ${shownCardPoints[0] + 11}`;
+    } else if (shownCardPoints.length === 2) {
+        pointsSpan.textContent = `Possible Point Totals: ${1 + 1} to ${
+            1 + 11
+        } OR ${11 + 1} to ${11 + 11}`;
+    }
 };
 
 const resetEverything = () => {
@@ -233,7 +238,9 @@ const isOneCardAnAce = (hand) => {
 const handHasBlackJack = (hand) => pointTotals[hand.owner].includes(21);
 
 const dealForDealer = () => {
-    while(Math.max(...pointTotals["dealer"]) < 17) {
+    renderHand(dealerHand);
+    calculateAndRenderPoints(dealerHand);
+    while (Math.max(...pointTotals["dealer"]) < 17) {
         dealOneCard(dealerHand);
         renderHand(dealerHand);
         calculateAndRenderPoints(dealerHand);
@@ -242,15 +249,21 @@ const dealForDealer = () => {
     if (dealerHand.busted) {
         signalWin();
     } else {
-        if (Math.max(...pointTotals["dealer"]) > Math.max(...pointTotals["player"])) {
+        if (
+            Math.max(...pointTotals["dealer"]) >
+            Math.max(...pointTotals["player"])
+        ) {
             signalLoss();
-        } else if (Math.max(...pointTotals["dealer"]) < Math.max(...pointTotals["player"])) {
+        } else if (
+            Math.max(...pointTotals["dealer"]) <
+            Math.max(...pointTotals["player"])
+        ) {
             signalWin();
         } else {
             signalDraw();
         }
     }
-}
+};
 
 const signalDraw = () => {
     document.querySelector("#draw-message").classList.remove("invisible");
@@ -282,7 +295,9 @@ window.addEventListener("click", (e) => {
     if (e.target.id === "deal-button") {
         resetEverything();
         initialDeal();
-        calculateAndRenderPoints(dealerHand);
+        // calculateAndRenderPoints(dealerHand);
+        calculatePoints(dealerHand);
+        calculateAndRenderPossiblePointRange(dealerHand);
         calculateAndRenderPoints(playerHand);
         document.querySelector("#hit-button").classList.remove("disabled");
         document.querySelector("#stand-button").classList.remove("disabled");
@@ -290,10 +305,16 @@ window.addEventListener("click", (e) => {
         console.log(pointTotals["dealer"]);
         console.log(pointTotals["player"]);
         if (handHasBlackJack(dealerHand) && handHasBlackJack(playerHand)) {
+            renderHand(dealerHand);
             signalDraw();
-        } else if (handHasBlackJack(dealerHand) && !handHasBlackJack(playerHand)) {
+        } else if (
+            handHasBlackJack(dealerHand) &&
+            !handHasBlackJack(playerHand)
+        ) {
+            renderHand(dealerHand);
             signalLoss();
         } else if (handHasBlackJack(playerHand)) {
+            renderHand(dealerHand);
             signalWin();
         }
     } else if (e.target.id === "hit-button") {
@@ -303,6 +324,7 @@ window.addEventListener("click", (e) => {
         setHandBustStatus(playerHand);
         if (playerHand.busted) {
             setTimeout(signalLoss, 500);
+            renderHand(dealerHand);
         }
     } else if (e.target.id === "stand-button") {
         let buttons = document.querySelectorAll(".game");
