@@ -235,9 +235,9 @@ const handHasBlackJack = (hand) => pointTotals[hand.owner].includes(21);
 const dealForDealer = () => {
     while(Math.max(...pointTotals["dealer"]) < 17) {
         dealOneCard(dealerHand);
-        calculateAndRenderPoints(dealerHand);
         renderHand(dealerHand);
-        setHandBustStatus(dealerHand)
+        calculateAndRenderPoints(dealerHand);
+        setHandBustStatus(dealerHand);
     }
     if (dealerHand.busted) {
         signalWin();
@@ -302,7 +302,7 @@ window.addEventListener("click", (e) => {
         calculateAndRenderPoints(playerHand);
         setHandBustStatus(playerHand);
         if (playerHand.busted) {
-            signalLoss();
+            setTimeout(signalLoss, 500);
         }
     } else if (e.target.id === "stand-button") {
         let buttons = document.querySelectorAll(".game");
