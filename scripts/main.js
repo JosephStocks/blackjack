@@ -323,8 +323,9 @@ window.addEventListener("click", (e) => {
         calculateAndRenderPoints(playerHand);
         setHandBustStatus(playerHand);
         if (playerHand.busted) {
-            setTimeout(signalLoss, 500);
             renderHand(dealerHand);
+            calculateAndRenderPoints(dealerHand);
+            setTimeout(signalLoss, 500);
         }
     } else if (e.target.id === "stand-button") {
         let buttons = document.querySelectorAll(".game");
