@@ -10,7 +10,7 @@ const rankToName = (rank) => {
 };
 
 const fillNewDeck = () => {
-    let imageDir = "images";
+    let imageDir = "images-small";
     for (const suit of ["clubs", "diamonds", "hearts", "spades"]) {
         for (let rank = 1; rank <= 13; rank++) {
             let name = rankToName(rank).toString();
@@ -97,7 +97,7 @@ const renderHand = (hand) => {
 
 const renderHiddenCard = (hand) => {
     let img = document.createElement("img");
-    img.src = "images/back_of_card1_bicycle.png";
+    img.src = "images-small/back_of_card1_bicycle.png";
     img.className = "card";
     let cardWrapper = document.createElement("div");
     cardWrapper.className = "card-wrapper";
