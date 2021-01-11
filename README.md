@@ -1,7 +1,9 @@
 # Blackjack
 
-This is a website implementation of the casino card game blackjack.
+This is a website implementation of the casino card game blackjack.  
 Tools: Pure Javascript, Pure CSS (& SASS), HTML
+
+Play it here! | [joesblackjack.netlify.app](joesblackjack.netlify.app)
 
 Initial Deal
 ![InitialDeal-screenshot](https://user-images.githubusercontent.com/26754072/104141125-c1f35f80-537a-11eb-9323-dc64ae3452e5.png)
