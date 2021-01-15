@@ -3,7 +3,7 @@
 This is a website implementation of the casino card game blackjack.  
 Tools: Pure Javascript, Pure CSS (& SASS), HTML
 
-Play it here! | [joesblackjack.netlify.app](joesblackjack.netlify.app)
+Play it here! | [joesblackjack.netlify.app](https://joesblackjack.netlify.app/)
 
 | Initial Deal | A Win! |
 |:---:|:---:|
